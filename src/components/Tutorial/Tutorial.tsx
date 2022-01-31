@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react"
+import { ChangeEvent, useState, useEffect } from "react"
 
 import TutorialDataService from '../../services/service'
 import ITutorialData from "../../types/types"
@@ -9,15 +9,25 @@ type Props = {
 }
 
 const Tutorial = ({ tutorial, refreshList} : Props) => {
-  const { key, title, description, published} = tutorial
-  const [currentTutorial, setCurretTutorial] = useState({
-    key,
-    title,
-    description,
-    published
+  const [currentTutorial, setCurretTutorial] = useState<ITutorialData>({
+    key: null,
+    title: '',
+    description: '',
+    published: false
   })
 
   const [message, setMessage] = useState('')
+
+  useEffect(() => {
+    const { key, title, description, published } = tutorial
+    setCurretTutorial({
+      key,
+      title,
+      description,
+      published
+    })
+    setMessage('')
+  }, [tutorial])
 
   const handleInputChange = (eve: ChangeEvent<HTMLInputElement>) => {
     const {name, value} = eve.target
@@ -82,6 +92,7 @@ const Tutorial = ({ tutorial, refreshList} : Props) => {
                 type="text"
                 className="form-control"
                 id="title"
+                name="title"
                 value={currentTutorial.title}
                 onChange={handleInputChange}
               />
@@ -90,6 +101,7 @@ const Tutorial = ({ tutorial, refreshList} : Props) => {
               <label htmlFor="description">Description</label>
               <input
                 type="text"
+                name="description"
                 className="form-control"
                 id="description"
                 value={currentTutorial.description}
