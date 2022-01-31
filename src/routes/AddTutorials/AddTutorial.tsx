@@ -6,7 +6,6 @@ import ITutorialData from '../../types/types'
 
 const AddTutorial = () => {
 
-  console.log('jsfeifjiej')
   const [inputField, setInputField] = useState<ITutorialData>({
     title: '',
     description: '',
