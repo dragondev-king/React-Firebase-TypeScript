@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react"
+import { ChangeEvent, useState } from "react"
 
 import TutorialDataService from '../../services/service'
 import ITutorialData from "../../types/types"
